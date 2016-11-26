@@ -2,4 +2,9 @@
 
 require "webdrivers"
 
-Webdrivers::Geckodriver.install *ARGV
+case ARGV.shift
+  when 'reset', 'uninstall', 'remove'
+    Webdrivers::Geckodriver.reset
+  else
+    Webdrivers::Geckodriver.install *ARGV
+end

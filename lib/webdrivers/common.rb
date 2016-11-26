@@ -61,6 +61,12 @@ module Webdrivers
       rescue
         false
       end
+
+      def reset
+        File.delete binary_path
+        gem_name = file_name[/^[^\.]+/]
+        File.delete "#{ENV['GEM_HOME']}/bin/#{gem_name}"
+      end
     end
 
   end

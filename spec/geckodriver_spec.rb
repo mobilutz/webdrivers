@@ -4,6 +4,23 @@ describe Webdrivers::Geckodriver do
 
   let(:geckodriver) { Webdrivers::Geckodriver }
 
+  it 'downloads' do
+    geckodriver.download
+    file = "#{ENV['GEM_HOME']}/bin/geckodriver"
+    expect(File.exist?(file)).to eq true
+  end
+
+  it 'deletes' do
+    begin
+      geckodriver.download
+      geckodriver.reset
+      file = "#{ENV['GEM_HOME']}/bin/geckodriver"
+      expect(File.exist?(file)).to eq false
+    ensure
+      system %w[bundle install]
+    end
+  end
+
   it { expect(geckodriver.newest_version.to_f).to be >= 0.11 }
 
   it { expect(geckodriver.downloads.size).to be >= 4 }

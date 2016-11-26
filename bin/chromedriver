@@ -2,4 +2,11 @@
 
 require "webdrivers"
 
-Webdrivers::Chromedriver.install *ARGV
+case ARGV.first
+  when 'reset', 'uninstall', 'remove'
+    Webdrivers::Chromedriver.reset
+    %x(gem uninstall chromedriver)
+  else
+    Webdrivers::Chromedriver.install *ARGV
+end
+
