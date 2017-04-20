@@ -96,7 +96,7 @@ module Webdrivers
       end
 
       def internet_connection?
-        true #if open(base_url)
+        true if open(base_url)
       rescue
         false
       end
